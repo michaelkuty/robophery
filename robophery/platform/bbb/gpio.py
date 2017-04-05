@@ -27,6 +27,7 @@ class BeagleboneGpioInterface(GpioInterface):
     GPIO implementation for the Beaglebone Black using the Adafruit_BBIO
     library.
     """
+    BBB_GPIO_COUNT = 125
 
     def __init__(self, *args, **kwargs):
         self._bus = Adafruit_BBIO.GPIO
@@ -38,7 +39,7 @@ class BeagleboneGpioInterface(GpioInterface):
         self._edge_mapping = {self.GPIO_EVENT_RISING: self._bus.RISING,
                               self.GPIO_EVENT_FALLING: self._bus.FALLING,
                               self.GPIO_EVENT_BOTH: self._bus.BOTH}
-        super(BeagleboneGpioInterface, self).__init__(*args, **kwargs)
+        super(BeagleboneGpioInterface, self).__init__(num_gpio=self.BBB_GPIO_COUNT, *args, **kwargs)
 
     def setup_pin(self, pin, mode, pull_up_down=None):
         if pull_up_down is None:

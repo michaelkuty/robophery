@@ -29,6 +29,7 @@ class RaspberryPiGpioInterface(GpioInterface):
     """
     GPIO implementation for the Raspberry Pi using the RPi.GPIO library.
     """
+    RPI_GPIO_COUNT = 27
 
     def __init__(self, *args, **kwargs):
         self._mode = kwargs.get('mode', None)
@@ -51,7 +52,7 @@ class RaspberryPiGpioInterface(GpioInterface):
         self._edge_mapping = { self.GPIO_EVENT_RISING: self._bus.RISING,
                                self.GPIO_EVENT_FALLING: self._bus.FALLING,
                                self.GPIO_EVENT_BOTH: self._bus.BOTH }
-        super(RaspberryPiGpioInterface, self).__init__(*args, **kwargs)
+        super(RaspberryPiGpioInterface, self).__init__(num_gpio=self.RPI_GPIO_COUNT, *args, **kwargs)
 
 
     def __del__(self):
