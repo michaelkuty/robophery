@@ -1,5 +1,6 @@
 from machine import Pin
 from robophery.interface.gpio import GpioInterface
+from robotparser.compat import const
 
 
 class NodeMcuGpioInterface(GpioInterface):
